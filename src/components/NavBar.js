@@ -73,9 +73,13 @@ const NavBar = () => {
                     id="qsLoginBtn"
                     color="primary"
                     className="btn-margin"
-                    onClick={() => loginWithRedirect()}
+                    onClick={() => loginWithRedirect(
+                      //   {
+                      // scope: 'default:admin'
+                      // }
+                    )}
                   >
-                    Log in
+                    Log inx
                   </Button>
                 </NavItem>
               )}

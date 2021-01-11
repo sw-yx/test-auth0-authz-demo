@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
 const jwt = require("express-jwt");
+const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require("jwks-rsa");
 const authConfig = require("./src/auth_config.json");
 
@@ -35,6 +36,12 @@ const checkJwt = jwt({
   algorithms: ["RS256"]
 });
 
+// const checkScopes = jwtAuthz([ 'default:admin' ])
+const checkScopes = (...rest) => {
+  console.log(rest[0].user)
+  return jwtAuthz([ 'default:admin' ])(...rest);
+}
+// app.get("/api/external", checkJwt, checkScopes, (req, res) => {
 app.get("/api/external", checkJwt, (req, res) => {
   console.log(req.user)
   res.send({
